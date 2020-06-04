@@ -1,4 +1,4 @@
 package com.example.thousandaire
 
-class testclass {
+class ProceedActivity {
 }

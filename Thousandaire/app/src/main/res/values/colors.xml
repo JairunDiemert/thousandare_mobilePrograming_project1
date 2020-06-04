@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="color_background_activity_main">#265254</color>
+    <color name="color_background_activity_proceed">#399f45</color>
+    <color name="color_background_activity_game_over">#951314</color>
+    <color name="color_background_activity_score">#123a8a</color>
 </resources>
