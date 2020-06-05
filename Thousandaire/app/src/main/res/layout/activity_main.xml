@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:gravity="center"
-        android:text="@string/question_mickey"
+        tools:text="Question text?"
         android:textColor="@color/color_text"
         android:textSize="20sp"/>
 
