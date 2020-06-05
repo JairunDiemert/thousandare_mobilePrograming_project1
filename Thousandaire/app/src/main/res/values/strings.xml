@@ -43,4 +43,7 @@
     <string name="answer_miles_200">200</string>
     <string name="point_miles_amount">1000</string>
 
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+
 </resources>
