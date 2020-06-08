@@ -2,6 +2,7 @@ package com.example.thousandaire
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -10,14 +11,20 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
-class MainActivity : AppCompatActivity() {
+private const val TAG = "Debug"
 
-    private lateinit var questionTextView: TextView
-    private lateinit var answerTopLeftButton: Button
+class MainActivity : AppCompatActivity() {
 
     private val game: Game by lazy {
         ViewModelProviders.of(this).get(Game::class.java)
     }
+
+    private lateinit var questionTextView: TextView
+    private lateinit var answerChoiceList: List<Int>
+    private lateinit var answerTopLeftButton: Button
+    private lateinit var answerTopRightButton: Button
+    private lateinit var answerBottomLeftButton: Button
+    private lateinit var answerBottomRightButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +104,22 @@ class MainActivity : AppCompatActivity() {
 
         questionTextView = findViewById(R.id.question_text_view)
         answerTopLeftButton = findViewById(R.id.answer_top_left_button)
+        answerTopRightButton = findViewById(R.id.answer_top_right_button)
+        answerBottomLeftButton = findViewById(R.id.answer_bottom_left_button)
+        answerBottomRightButton = findViewById(R.id.answer_bottom_right_button)
+
 
         answerTopLeftButton.setOnClickListener { view: View ->
-            checkAnswer(R.id.answer_top_left_button)
+            checkAnswer(getString(answerChoiceList[0]))
+        }
+        answerTopRightButton.setOnClickListener { view: View ->
+            checkAnswer(getString(answerChoiceList[1]))
+        }
+        answerBottomLeftButton.setOnClickListener { view: View ->
+            checkAnswer(getString(answerChoiceList[2]))
+        }
+        answerBottomRightButton.setOnClickListener { view: View ->
+            checkAnswer(getString(answerChoiceList[3]))
         }
 
         updateQuestion()
@@ -108,13 +128,19 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion() {
         val questionTextResId = game.currentQuestionText
         questionTextView.setText(questionTextResId)
+
+        answerChoiceList = game.currentQuestionChoices
+        answerTopLeftButton.setText(answerChoiceList[0])
+        answerTopRightButton.setText(answerChoiceList[1])
+        answerBottomLeftButton.setText(answerChoiceList[2])
+        answerBottomRightButton.setText(answerChoiceList[3])
     }
 
-    private fun checkAnswer(userAnswer:Int) {
-        val correctAnswer = game.currentQuestionAnswer
-
+    private fun checkAnswer(userAnswer: String) {
+        val currentQuestionAnswer = getString(game.currentQuestionAnswer)
+        Log.d(TAG, currentQuestionAnswer)
         val messageResId = when {
-            userAnswer == correctAnswer -> R.string.correct_toast
+            userAnswer == currentQuestionAnswer -> R.string.correct_toast
             else -> R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()

@@ -33,7 +33,12 @@ class Game : ViewModel() {
     val currentQuestionChoices : List<Int>
         get(): List<Int> {
             if (questions.isEmpty())
-                return listOf<Int>()
+                return listOf<Int>(
+                    R.string.answer_top_left_default,
+                    R.string.answer_top_right_default,
+                    R.string.answer_bottom_left_default,
+                    R.string.answer_bottom_right_default
+                )
             return questions[currentQuestionIndex].choiceIds
         }
 
