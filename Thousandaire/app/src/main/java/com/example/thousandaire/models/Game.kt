@@ -47,7 +47,7 @@ class Game : ViewModel() {
     }
 
     fun isFinalQuestion(): Boolean {
-        if (currentQuestionIndex >= questions.size)
+        if (currentQuestionIndex >= questions.size - 1)
             return true
         return false
     }

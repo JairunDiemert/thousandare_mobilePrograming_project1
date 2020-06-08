@@ -12,6 +12,7 @@ import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
 private const val TAG = "Debug"
+private const val KEY_INDEX = "index"
 
 class MainActivity : AppCompatActivity() {
 
@@ -111,15 +112,23 @@ class MainActivity : AppCompatActivity() {
 
         answerTopLeftButton.setOnClickListener { view: View ->
             checkAnswer(getString(answerChoiceList[0]))
+            game.proceedToNextQuestion()
+            updateQuestion()
         }
         answerTopRightButton.setOnClickListener { view: View ->
             checkAnswer(getString(answerChoiceList[1]))
+            game.proceedToNextQuestion()
+            updateQuestion()
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
             checkAnswer(getString(answerChoiceList[2]))
+            game.proceedToNextQuestion()
+            updateQuestion()
         }
         answerBottomRightButton.setOnClickListener { view: View ->
             checkAnswer(getString(answerChoiceList[3]))
+            game.proceedToNextQuestion()
+            updateQuestion()
         }
 
         updateQuestion()
