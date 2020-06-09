@@ -1,10 +1,7 @@
 <resources>
     <string name="app_name">Thousandaire</string>
-    <string name="question_default">This is a default question text.</string>
-    <string name="answer_top_left_default">Q(TL)</string>
-    <string name="answer_top_right_default">Q(TR)</string>
-    <string name="answer_bottom_left_default">Q(BL)</string>
-    <string name="answer_bottom_right_default">Q(BR)</string>
+
+    <string name="default_text">default</string>
 
     <string name="question_mickey">What is the name of Mickey Mouse\'s dog?</string>
     <string name="answer_mickey_pluto">Pluto</string>
@@ -47,6 +44,9 @@
     <string name="answer_miles_100">100</string>
     <string name="answer_miles_200">200</string>
     <string name="point_miles_amount">1000</string>
+
+    <string name="go_on_button">GO ON</string>
+    <string name="quit_button">QUIT</string>
 
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>

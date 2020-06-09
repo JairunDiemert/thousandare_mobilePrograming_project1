@@ -2,11 +2,9 @@ package com.example.thousandaire
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
@@ -110,23 +108,23 @@ class MainActivity : AppCompatActivity() {
 
 
         answerTopLeftButton.setOnClickListener { view: View ->
-            checkAnswer(getString(answerChoiceList[0]))
-            game.proceedToNextQuestion()
+            if(checkAnswer(getString(answerChoiceList[0])))
+                game.proceedToNextQuestion()
             updateQuestion()
         }
         answerTopRightButton.setOnClickListener { view: View ->
-            checkAnswer(getString(answerChoiceList[1]))
-            game.proceedToNextQuestion()
+            if(checkAnswer(getString(answerChoiceList[1])))
+                game.proceedToNextQuestion()
             updateQuestion()
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
-            checkAnswer(getString(answerChoiceList[2]))
-            game.proceedToNextQuestion()
+            if(checkAnswer(getString(answerChoiceList[2])))
+                game.proceedToNextQuestion()
             updateQuestion()
         }
         answerBottomRightButton.setOnClickListener { view: View ->
-            checkAnswer(getString(answerChoiceList[3]))
-            game.proceedToNextQuestion()
+            if(checkAnswer(getString(answerChoiceList[3])))
+                game.proceedToNextQuestion()
             updateQuestion()
         }
 
@@ -144,14 +142,12 @@ class MainActivity : AppCompatActivity() {
         answerBottomRightButton.setText(answerChoiceList[3])
     }
 
-    private fun checkAnswer(userAnswer: String) {
+    private fun checkAnswer(userAnswer: String) : Boolean {
         val currentQuestionAnswer = getString(game.currentQuestionAnswer)
-        Log.d(TAG, currentQuestionAnswer)
-        val messageResId = when {
-            userAnswer == currentQuestionAnswer -> R.string.correct_toast
-            else -> R.string.incorrect_toast
+        return when {
+            userAnswer == currentQuestionAnswer -> true
+            else -> false
         }
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
     }
 
 }

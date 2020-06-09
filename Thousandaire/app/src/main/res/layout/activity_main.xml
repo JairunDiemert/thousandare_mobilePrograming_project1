@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:gravity="center"
-        tools:text="question_text_view"
+        tools:text="@string/default_text"
         android:textColor="@color/color_text"
         android:textSize="20sp"/>
 
@@ -27,13 +27,13 @@
             android:id="@+id/answer_top_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="top_left"/>
+            tools:text="@string/default_text"/>
 
         <Button
             android:id="@+id/answer_top_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="top_right"/>
+            tools:text="@string/default_text"/>
 
     </LinearLayout>
 
@@ -46,13 +46,13 @@
             android:id="@+id/answer_bottom_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="bottom_left"/>
+            tools:text="@string/default_text"/>
 
         <Button
             android:id="@+id/answer_bottom_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="bottom_right"/>
+            tools:text="@string/default_text"/>
 
     </LinearLayout>
 

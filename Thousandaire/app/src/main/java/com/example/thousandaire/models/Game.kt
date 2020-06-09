@@ -12,14 +12,14 @@ class Game : ViewModel() {
     val currentQuestionAnswer: Int
         get(): Int {
             if(questions.isEmpty())
-                return R.string.app_name
+                return R.string.default_text
             return questions[currentQuestionIndex].answerId
         }
 
     val currentQuestionText: Int
         get(): Int {
             if (questions.isEmpty())
-                return R.string.app_name
+                return R.string.default_text
             return questions[currentQuestionIndex].questionTextId
         }
 
@@ -34,10 +34,10 @@ class Game : ViewModel() {
         get(): List<Int> {
             if (questions.isEmpty())
                 return listOf<Int>(
-                    R.string.answer_top_left_default,
-                    R.string.answer_top_right_default,
-                    R.string.answer_bottom_left_default,
-                    R.string.answer_bottom_right_default
+                    R.string.default_text,
+                    R.string.default_text,
+                    R.string.default_text,
+                    R.string.default_text
                 )
             return questions[currentQuestionIndex].choiceIds
         }
