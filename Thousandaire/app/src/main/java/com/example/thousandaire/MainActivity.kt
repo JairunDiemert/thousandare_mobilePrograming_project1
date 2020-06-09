@@ -12,7 +12,6 @@ import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
 private const val TAG = "Debug"
-private const val KEY_INDEX = "index"
 
 class MainActivity : AppCompatActivity() {
 

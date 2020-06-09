@@ -53,8 +53,7 @@ class Game : ViewModel() {
     }
 
     fun proceedToNextQuestion() {
-        if(!isFinalQuestion())
-            currentQuestionIndex += 1
+        currentQuestionIndex = (currentQuestionIndex + 1) % questions.size
     }
 
 }
