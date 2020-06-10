@@ -9,8 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
-private const val TAG = "Debug"
-
 class MainActivity : AppCompatActivity() {
 
     private val game: Game by lazy {
@@ -28,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_mickey,
             R.string.answer_mickey_pluto,
             listOf<Int> (
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             R.string.point_mickey_amount)
         )
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_planet,
             R.string.answer_planet_jupiter,
             listOf<Int> (
@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
             R.string.point_planet_amount)
         )
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_gilligan,
             R.string.answer_gilligan_7,
             listOf<Int> (
@@ -64,7 +65,8 @@ class MainActivity : AppCompatActivity() {
             R.string.point_gilligan_amount)
         )
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_periodic,
             R.string.answer_periodic_E,
             listOf<Int> (
@@ -76,7 +78,8 @@ class MainActivity : AppCompatActivity() {
             R.string.point_periodic_amount)
         )
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_valletta,
             R.string.answer_valletta_malta,
             listOf<Int> (
@@ -88,7 +91,8 @@ class MainActivity : AppCompatActivity() {
             R.string.point_valletta_amount)
         )
 
-        game.addQuestion(Question(
+        game.addQuestion(
+            Question(
             R.string.question_miles,
             R.string.answer_miles_100,
             listOf<Int> (
@@ -105,7 +109,6 @@ class MainActivity : AppCompatActivity() {
         answerTopRightButton = findViewById(R.id.answer_top_right_button)
         answerBottomLeftButton = findViewById(R.id.answer_bottom_left_button)
         answerBottomRightButton = findViewById(R.id.answer_bottom_right_button)
-
 
         answerTopLeftButton.setOnClickListener { view: View ->
             if(checkAnswer(getString(answerChoiceList[0])))
@@ -127,7 +130,6 @@ class MainActivity : AppCompatActivity() {
                 game.proceedToNextQuestion()
             updateQuestion()
         }
-
         updateQuestion()
     }
 
@@ -149,5 +151,4 @@ class MainActivity : AppCompatActivity() {
             else -> false
         }
     }
-
 }

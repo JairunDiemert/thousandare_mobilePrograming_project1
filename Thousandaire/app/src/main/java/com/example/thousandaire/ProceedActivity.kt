@@ -1,24 +1,23 @@
 package com.example.thousandaire
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import com.example.thousandaire.models.Game
-
-private const val EXTRA_CURRENT_QUESTION_AMOUNT = "com.example.thousandaire.current_question_amount"
-private const val EXTRA_NEXT_QUESTION_AMOUNT = "com.example.thousandaire.next_question_amount"
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 
 class ProceedActivity : AppCompatActivity() {
 
-    private var currentQuestionAmount = R.string.default_text
-    private var nextQuestionAmount = R.string.default_text
+    private lateinit var proceedTextView: TextView
+    private lateinit var goOnButton: Button
+    private lateinit var quitButton: Button
 
-    companion object {
-        fun newIntent(packageContext: Context, currentQuestionAmount : Int, nextQuestionAmount : String): Intent {
-            return Intent(packageContext, ProceedActivity::class.java).apply {
-                putExtra(EXTRA_CURRENT_QUESTION_AMOUNT, currentQuestionAmount)
-                putExtra(EXTRA_NEXT_QUESTION_AMOUNT, nextQuestionAmount)
-            }
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_proceed)
+
+        proceedTextView = findViewById(R.id.proceed_text_view)
+        goOnButton = findViewById(R.id.go_on_button)
+        quitButton = findViewById(R.id.quit_button)
+
     }
 }
