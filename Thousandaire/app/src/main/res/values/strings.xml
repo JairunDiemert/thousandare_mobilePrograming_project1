@@ -47,8 +47,11 @@
 
     <string name="go_on_button">GO ON</string>
     <string name="quit_button">QUIT</string>
+    <string name="quit_game_button">QUIT GAME</string>
 
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
+
+    <string name="game_over_text">I\'m sorry! That is not the correct answer!</string>
 
 </resources>

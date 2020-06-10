@@ -12,6 +12,7 @@ import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
 private const val REQUEST_PROCEED_BUTTON_CLICKED = 0
+private const val REQUEST_QUIT_GAME_BUTTON_CLICKED = 0
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,80 +33,86 @@ class MainActivity : AppCompatActivity() {
 
         game.addQuestion(
             Question(
-            R.string.question_mickey,
-            R.string.answer_mickey_pluto,
-            listOf<Int> (
+                R.string.question_mickey,
                 R.string.answer_mickey_pluto,
-                R.string.answer_mickey_goofy,
-                R.string.answer_mickey_minnie,
-                R.string.answer_mickey_daisy
-            ),
-            R.string.point_mickey_amount)
+                listOf<Int>(
+                    R.string.answer_mickey_pluto,
+                    R.string.answer_mickey_goofy,
+                    R.string.answer_mickey_minnie,
+                    R.string.answer_mickey_daisy
+                ),
+                R.string.point_mickey_amount
+            )
         )
 
         game.addQuestion(
             Question(
-            R.string.question_planet,
-            R.string.answer_planet_jupiter,
-            listOf<Int> (
-                R.string.answer_planet_earth,
-                R.string.answer_planet_mars,
+                R.string.question_planet,
                 R.string.answer_planet_jupiter,
-                R.string.answer_planet_venus
-            ),
-            R.string.point_planet_amount)
+                listOf<Int>(
+                    R.string.answer_planet_earth,
+                    R.string.answer_planet_mars,
+                    R.string.answer_planet_jupiter,
+                    R.string.answer_planet_venus
+                ),
+                R.string.point_planet_amount
+            )
         )
 
         game.addQuestion(
             Question(
-            R.string.question_gilligan,
-            R.string.answer_gilligan_7,
-            listOf<Int> (
-                R.string.answer_gilligan_2,
-                R.string.answer_gilligan_6,
+                R.string.question_gilligan,
                 R.string.answer_gilligan_7,
-                R.string.answer_gilligan_8
-            ),
-            R.string.point_gilligan_amount)
+                listOf<Int>(
+                    R.string.answer_gilligan_2,
+                    R.string.answer_gilligan_6,
+                    R.string.answer_gilligan_7,
+                    R.string.answer_gilligan_8
+                ),
+                R.string.point_gilligan_amount
+            )
         )
 
         game.addQuestion(
             Question(
-            R.string.question_periodic,
-            R.string.answer_periodic_E,
-            listOf<Int> (
-                R.string.answer_periodic_Tc,
-                R.string.answer_periodic_O,
-                R.string.answer_periodic_Fe,
-                R.string.answer_periodic_E
-            ),
-            R.string.point_periodic_amount)
+                R.string.question_periodic,
+                R.string.answer_periodic_E,
+                listOf<Int>(
+                    R.string.answer_periodic_Tc,
+                    R.string.answer_periodic_O,
+                    R.string.answer_periodic_Fe,
+                    R.string.answer_periodic_E
+                ),
+                R.string.point_periodic_amount
+            )
         )
 
         game.addQuestion(
             Question(
-            R.string.question_valletta,
-            R.string.answer_valletta_malta,
-            listOf<Int> (
-                R.string.answer_valletta_croatia,
-                R.string.answer_valletta_latvia,
-                R.string.answer_valletta_estonia,
-                R.string.answer_valletta_malta
-            ),
-            R.string.point_valletta_amount)
+                R.string.question_valletta,
+                R.string.answer_valletta_malta,
+                listOf<Int>(
+                    R.string.answer_valletta_croatia,
+                    R.string.answer_valletta_latvia,
+                    R.string.answer_valletta_estonia,
+                    R.string.answer_valletta_malta
+                ),
+                R.string.point_valletta_amount
+            )
         )
 
         game.addQuestion(
             Question(
-            R.string.question_miles,
-            R.string.answer_miles_100,
-            listOf<Int> (
-                R.string.answer_miles_1,
-                R.string.answer_miles_10,
+                R.string.question_miles,
                 R.string.answer_miles_100,
-                R.string.answer_miles_200
-            ),
-            R.string.point_miles_amount)
+                listOf<Int>(
+                    R.string.answer_miles_1,
+                    R.string.answer_miles_10,
+                    R.string.answer_miles_100,
+                    R.string.answer_miles_200
+                ),
+                R.string.point_miles_amount
+            )
         )
 
         questionTextView = findViewById(R.id.question_text_view)
@@ -115,31 +122,43 @@ class MainActivity : AppCompatActivity() {
         answerBottomRightButton = findViewById(R.id.answer_bottom_right_button)
 
         answerTopLeftButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[0]))) {
+            if (checkAnswer(getString(answerChoiceList[0]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                 startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+            } else {
+                val intent = GameOverActivity.newIntent(this)
+                startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
             }
         }
         answerTopRightButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[1]))) {
+            if (checkAnswer(getString(answerChoiceList[1]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                 startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+            } else {
+                val intent = GameOverActivity.newIntent(this)
+                startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
             }
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[2]))) {
+            if (checkAnswer(getString(answerChoiceList[2]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                 startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+            } else {
+                val intent = GameOverActivity.newIntent(this)
+                startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
             }
         }
         answerBottomRightButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[3]))) {
+            if (checkAnswer(getString(answerChoiceList[3]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                 startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+            } else {
+                val intent = GameOverActivity.newIntent(this)
+                startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
             }
         }
         updateQuestion()
@@ -148,17 +167,28 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode != Activity.RESULT_OK) {
-            return
-        }
-
-        if(requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
-            val proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
-            if(proceedButtonClicked){
-                game.proceedToNextQuestion()
-                updateQuestion()
+        if (resultCode != Activity.RESULT_OK) {
+            if (resultCode != Activity.RESULT_CANCELED) {
+                return
             }
             else {
+                finish()
+            }
+        }
+
+        if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
+            val proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+            if (proceedButtonClicked) {
+                game.proceedToNextQuestion()
+                updateQuestion()
+            } else {
+                finish()
+            }
+        }
+
+        if (requestCode == REQUEST_QUIT_GAME_BUTTON_CLICKED) {
+            val quitGameButtonClicked = data?.getBooleanExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED, false) ?: false
+            if (quitGameButtonClicked) {
                 finish()
             }
         }
