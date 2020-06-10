@@ -158,6 +158,9 @@ class MainActivity : AppCompatActivity() {
                 game.proceedToNextQuestion()
                 updateQuestion()
             }
+            else {
+                finish()
+            }
         }
     }
 

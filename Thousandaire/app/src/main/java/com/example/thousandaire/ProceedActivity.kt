@@ -35,6 +35,10 @@ class ProceedActivity : AppCompatActivity() {
             setProceedButtonClicked(true)
             finish()
         }
+        quitButton.setOnClickListener {
+            setProceedButtonClicked(false)
+            finish()
+        }
     }
 
     private fun setTextView(nextQuestionAmount : Int) {
