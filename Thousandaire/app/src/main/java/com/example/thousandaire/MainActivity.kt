@@ -11,16 +11,16 @@ import com.example.thousandaire.models.Question
 
 class MainActivity : AppCompatActivity() {
 
-    private val game: Game by lazy {
-        ViewModelProviders.of(this).get(Game::class.java)
-    }
-
     private lateinit var questionTextView: TextView
     private lateinit var answerChoiceList: List<Int>
     private lateinit var answerTopLeftButton: Button
     private lateinit var answerTopRightButton: Button
     private lateinit var answerBottomLeftButton: Button
     private lateinit var answerBottomRightButton: Button
+
+    private val game: Game by lazy {
+        ViewModelProviders.of(this).get(Game::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,23 +111,39 @@ class MainActivity : AppCompatActivity() {
         answerBottomRightButton = findViewById(R.id.answer_bottom_right_button)
 
         answerTopLeftButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[0])))
+            if(checkAnswer(getString(answerChoiceList[0]))) {
+                val nextQuestionAmount = game.nextQuestionAmount
+                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                startActivity(intent)
                 game.proceedToNextQuestion()
+            }
             updateQuestion()
         }
         answerTopRightButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[1])))
+            if(checkAnswer(getString(answerChoiceList[1]))) {
+                val nextQuestionAmount = game.nextQuestionAmount
+                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                startActivity(intent)
                 game.proceedToNextQuestion()
+            }
             updateQuestion()
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[2])))
+            if(checkAnswer(getString(answerChoiceList[2]))) {
+                val nextQuestionAmount = game.nextQuestionAmount
+                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                startActivity(intent)
                 game.proceedToNextQuestion()
+            }
             updateQuestion()
         }
         answerBottomRightButton.setOnClickListener { view: View ->
-            if(checkAnswer(getString(answerChoiceList[3])))
+            if(checkAnswer(getString(answerChoiceList[3]))) {
+                val nextQuestionAmount = game.nextQuestionAmount
+                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                startActivity(intent)
                 game.proceedToNextQuestion()
+            }
             updateQuestion()
         }
         updateQuestion()
