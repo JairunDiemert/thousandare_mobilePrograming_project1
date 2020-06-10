@@ -1,5 +1,7 @@
 package com.example.thousandaire
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +10,8 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
+
+private const val REQUEST_PROCEED_BUTTON_CLICKED = 0
 
 class MainActivity : AppCompatActivity() {
 
@@ -114,39 +118,47 @@ class MainActivity : AppCompatActivity() {
             if(checkAnswer(getString(answerChoiceList[0]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivity(intent)
-                game.proceedToNextQuestion()
+                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
             }
-            updateQuestion()
         }
         answerTopRightButton.setOnClickListener { view: View ->
             if(checkAnswer(getString(answerChoiceList[1]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivity(intent)
-                game.proceedToNextQuestion()
+                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
             }
-            updateQuestion()
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
             if(checkAnswer(getString(answerChoiceList[2]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivity(intent)
-                game.proceedToNextQuestion()
+                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
             }
-            updateQuestion()
         }
         answerBottomRightButton.setOnClickListener { view: View ->
             if(checkAnswer(getString(answerChoiceList[3]))) {
                 val nextQuestionAmount = game.nextQuestionAmount
                 val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivity(intent)
-                game.proceedToNextQuestion()
+                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
             }
-            updateQuestion()
         }
         updateQuestion()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode != Activity.RESULT_OK) {
+            return
+        }
+
+        if(requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
+            val proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+            if(proceedButtonClicked){
+                game.proceedToNextQuestion()
+                updateQuestion()
+            }
+        }
     }
 
     private fun updateQuestion() {

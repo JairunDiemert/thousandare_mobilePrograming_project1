@@ -1,5 +1,6 @@
 package com.example.thousandaire
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 
 private const val EXTRA_NEXT_QUESTION_AMOUNT = "com.example.thousandaire.next_question_amount"
+const val EXTRA_PROCEED_BUTTON_CLICKED = "com.example.thousandaire.proceed_button_clicked"
 
 class ProceedActivity : AppCompatActivity() {
 
@@ -29,6 +31,9 @@ class ProceedActivity : AppCompatActivity() {
 
         setTextView(nextQuestionAmount)
 
+        goOnButton.setOnClickListener {
+            setProceedButtonClicked(true)
+        }
     }
 
     private fun setTextView(nextQuestionAmount : Int) {
@@ -43,6 +48,13 @@ class ProceedActivity : AppCompatActivity() {
         val text : String = "Correct! You have earned \$$currentAmount. " +
                 "Would you care to try for \$${getString(nextQuestionAmount)}?"
         proceedTextView.setText(text)
+    }
+
+    private fun setProceedButtonClicked(isProceedButtonClicked : Boolean) {
+        val data = Intent().apply {
+            putExtra(EXTRA_PROCEED_BUTTON_CLICKED, isProceedButtonClicked)
+        }
+        setResult(Activity.RESULT_OK, data)
     }
 
     companion object {
