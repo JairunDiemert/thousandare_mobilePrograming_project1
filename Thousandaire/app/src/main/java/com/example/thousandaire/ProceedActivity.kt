@@ -33,6 +33,7 @@ class ProceedActivity : AppCompatActivity() {
 
         goOnButton.setOnClickListener {
             setProceedButtonClicked(true)
+            finish()
         }
     }
 
