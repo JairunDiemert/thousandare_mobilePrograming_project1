@@ -62,6 +62,11 @@ class ProceedActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, data)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        setResult(Activity.RESULT_CANCELED)
+    }
+
     companion object {
         fun newIntent(packageContext: Context, nextQuestionAmount : Int): Intent {
             return Intent(packageContext, ProceedActivity::class.java).apply {

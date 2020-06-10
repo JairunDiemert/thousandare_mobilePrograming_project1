@@ -13,6 +13,7 @@ import com.example.thousandaire.models.Question
 
 private const val REQUEST_PROCEED_BUTTON_CLICKED = 0
 private const val REQUEST_QUIT_GAME_BUTTON_CLICKED = 0
+private const val REQUEST_PLAY_OVER_BUTTON_CLICKED = 0
 
 class MainActivity : AppCompatActivity() {
 
@@ -176,20 +177,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
+        else if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
             val proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
             if (proceedButtonClicked) {
                 game.proceedToNextQuestion()
                 updateQuestion()
-            } else {
-                finish()
+            }
+            if (!proceedButtonClicked) {
+                val nextQuestionAmount = game.nextQuestionAmount
+                val intent = ScoreActivity.newIntent(this, nextQuestionAmount)
+                startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
             }
         }
 
-        if (requestCode == REQUEST_QUIT_GAME_BUTTON_CLICKED) {
-            val quitGameButtonClicked = data?.getBooleanExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED, false) ?: false
-            if (quitGameButtonClicked) {
-                finish()
+        else if (requestCode == REQUEST_PLAY_OVER_BUTTON_CLICKED) {
+            val playOverButtonClicked =
+                data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+            if (playOverButtonClicked) {
+                //do stuff
             }
         }
     }

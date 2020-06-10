@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-const val EXTRA_QUIT_GAME_BUTTON_CLICKED = "com.example.thousandaire.quit_game_button_clicked"
+const val EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER = "com.example.thousandaire.quit_game_button_clicked_game_over"
 
 class GameOverActivity : AppCompatActivity() {
 
@@ -16,6 +16,7 @@ class GameOverActivity : AppCompatActivity() {
     private lateinit var quitGameButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over)
 
@@ -25,15 +26,14 @@ class GameOverActivity : AppCompatActivity() {
         gameOverTextView.setText(R.string.game_over_text)
 
         quitGameButton.setOnClickListener {
-            setQuitGameButtonClicked(true)
-            finish()
+            finishAffinity()
         }
 
     }
 
     private fun setQuitGameButtonClicked(isQuitGameButtonClicked : Boolean) {
         val data = Intent().apply {
-            putExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED, isQuitGameButtonClicked)
+            putExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER, isQuitGameButtonClicked)
         }
         setResult(Activity.RESULT_OK, data)
     }
@@ -41,7 +41,7 @@ class GameOverActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         val data = Intent().apply {
-            putExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED, false)
+            putExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER, false)
         }
         setResult(Activity.RESULT_CANCELED, data)
     }
