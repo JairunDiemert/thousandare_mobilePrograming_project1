@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 
 private const val EXTRA_CURRENT_AMOUNT_EARNED = "com.example.thousandaire.current_amount_earned"
-private const val EXTRA_PLAY_OVER_CLICKED = "com.example.thousandaire.play_over_clicked"
+const val EXTRA_PLAY_OVER_CLICKED = "com.example.thousandaire.play_over_clicked"
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -34,6 +34,11 @@ class ScoreActivity : AppCompatActivity() {
         quitGameButton.setOnClickListener {
             finishAffinity()
         }
+
+        playOverButton.setOnClickListener{
+            setPlayOverClicked(true)
+            finish()
+        }
     }
 
     private fun setPlayOverClicked(isPlayOverButtonClicked : Boolean) {
@@ -50,6 +55,7 @@ class ScoreActivity : AppCompatActivity() {
             currentAmountEarned == R.string.point_periodic_amount -> getString(R.string.point_gilligan_amount)
             currentAmountEarned == R.string.point_valletta_amount -> getString(R.string.point_periodic_amount)
             currentAmountEarned == R.string.point_miles_amount -> getString(R.string.point_valletta_amount)
+            currentAmountEarned == R.string.you_won_score -> getString(R.string.point_miles_amount)
             else -> getString(R.string.default_text)
         }
         val text : String = "Congratulations!\nYou earned \$$currentAmount."

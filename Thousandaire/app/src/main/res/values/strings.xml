@@ -55,4 +55,6 @@
 
     <string name="game_over_text">I\'m sorry! That is not the correct answer!</string>
 
+    <string name="you_won_score">1001</string>
+
 </resources>

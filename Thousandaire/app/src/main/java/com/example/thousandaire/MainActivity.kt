@@ -12,8 +12,8 @@ import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
 
 private const val REQUEST_PROCEED_BUTTON_CLICKED = 0
-private const val REQUEST_QUIT_GAME_BUTTON_CLICKED = 0
-private const val REQUEST_PLAY_OVER_BUTTON_CLICKED = 0
+private const val REQUEST_QUIT_GAME_BUTTON_CLICKED = 1
+private const val REQUEST_PLAY_OVER_BUTTON_CLICKED = 2
 
 class MainActivity : AppCompatActivity() {
 
@@ -124,9 +124,16 @@ class MainActivity : AppCompatActivity() {
 
         answerTopLeftButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[0]))) {
-                val nextQuestionAmount = game.nextQuestionAmount
-                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                if(!game.isFinalQuestion()) {
+                    val nextQuestionAmount = game.nextQuestionAmount
+                    val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                    startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                }
+                else if (game.isFinalQuestion()) {
+                    val youWinAmount = R.string.you_won_score
+                    val intent = ScoreActivity.newIntent(this, youWinAmount)
+                    startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
+                }
             } else {
                 val intent = GameOverActivity.newIntent(this)
                 startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
@@ -134,9 +141,16 @@ class MainActivity : AppCompatActivity() {
         }
         answerTopRightButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[1]))) {
-                val nextQuestionAmount = game.nextQuestionAmount
-                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                if(!game.isFinalQuestion()) {
+                    val nextQuestionAmount = game.nextQuestionAmount
+                    val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                    startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                }
+                else if (game.isFinalQuestion()) {
+                    val youWinAmount = R.string.you_won_score
+                    val intent = ScoreActivity.newIntent(this, youWinAmount)
+                    startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
+                }
             } else {
                 val intent = GameOverActivity.newIntent(this)
                 startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
@@ -144,9 +158,16 @@ class MainActivity : AppCompatActivity() {
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[2]))) {
-                val nextQuestionAmount = game.nextQuestionAmount
-                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                if(!game.isFinalQuestion()) {
+                    val nextQuestionAmount = game.nextQuestionAmount
+                    val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                    startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                }
+                else if (game.isFinalQuestion()) {
+                    val youWinAmount = R.string.you_won_score
+                    val intent = ScoreActivity.newIntent(this, youWinAmount)
+                    startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
+                }
             } else {
                 val intent = GameOverActivity.newIntent(this)
                 startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
@@ -154,9 +175,16 @@ class MainActivity : AppCompatActivity() {
         }
         answerBottomRightButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[3]))) {
-                val nextQuestionAmount = game.nextQuestionAmount
-                val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
-                startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                if(!game.isFinalQuestion()) {
+                    val nextQuestionAmount = game.nextQuestionAmount
+                    val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
+                    startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
+                }
+                else if (game.isFinalQuestion()) {
+                    val youWinAmount = R.string.you_won_score
+                    val intent = ScoreActivity.newIntent(this, youWinAmount)
+                    startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
+                }
             } else {
                 val intent = GameOverActivity.newIntent(this)
                 startActivityForResult(intent, REQUEST_QUIT_GAME_BUTTON_CLICKED)
@@ -177,8 +205,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        else if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
-            val proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+        if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
+
+            var proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
             if (proceedButtonClicked) {
                 game.proceedToNextQuestion()
                 updateQuestion()
@@ -190,11 +219,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        else if (requestCode == REQUEST_PLAY_OVER_BUTTON_CLICKED) {
+        if (requestCode == REQUEST_PLAY_OVER_BUTTON_CLICKED) {
             val playOverButtonClicked =
-                data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+                data?.getBooleanExtra(EXTRA_PLAY_OVER_CLICKED, false) ?: false
             if (playOverButtonClicked) {
-                //do stuff
+                resetGameIndex()
+                updateQuestion()
             }
         }
     }
@@ -216,5 +246,12 @@ class MainActivity : AppCompatActivity() {
             userAnswer == currentQuestionAnswer -> true
             else -> false
         }
+    }
+
+    private fun resetGameIndex() {
+        while(!game.isFinalQuestion())
+            game.proceedToNextQuestion()
+        game.proceedToNextQuestion()
+
     }
 }
