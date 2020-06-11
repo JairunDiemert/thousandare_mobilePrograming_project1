@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android= "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/color_background_activity_game_over">
+    android:background="@color/color_background_activity_game_over"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/game_over_text_view"
@@ -16,12 +16,12 @@
         android:gravity="center"
         tools:text="@string/default_text"
         android:textColor="@color/color_text"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/quit_game_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/quit_game_button"/>
+    <Button
+        android:id="@+id/quit_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quit_game_button" />
 
 </LinearLayout>

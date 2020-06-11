@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android= "http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/color_background_activity_main">
+    android:background="@color/color_background_activity_main"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/question_text_view"
@@ -16,43 +16,47 @@
         android:gravity="center"
         tools:text="@string/default_text"
         android:textColor="@color/color_text"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/answer_top_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/default_text"/>
+            tools:text="@string/default_text"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/answer_top_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/default_text"/>
+            tools:text="@string/default_text"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/answer_bottom_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/default_text"/>
+            tools:text="@string/default_text"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/answer_bottom_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/default_text"/>
+            tools:text="@string/default_text"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 

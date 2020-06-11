@@ -50,9 +50,6 @@
     <string name="quit_game_button">QUIT GAME</string>
     <string name="play_over_button">PLAY OVER</string>
 
-    <string name="correct_toast">Correct!</string>
-    <string name="incorrect_toast">Incorrect!</string>
-
     <string name="game_over_text">I\'m sorry! That is not the correct answer!</string>
 
     <string name="you_won_score">1001</string>

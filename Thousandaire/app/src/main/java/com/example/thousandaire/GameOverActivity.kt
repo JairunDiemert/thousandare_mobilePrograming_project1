@@ -8,7 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-const val EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER = "com.example.thousandaire.quit_game_button_clicked_game_over"
+const val EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER =
+    "com.example.thousandaire.quit_game_button_clicked_game_over"
 
 class GameOverActivity : AppCompatActivity() {
 
@@ -29,13 +30,6 @@ class GameOverActivity : AppCompatActivity() {
             finishAffinity()
         }
 
-    }
-
-    private fun setQuitGameButtonClicked(isQuitGameButtonClicked : Boolean) {
-        val data = Intent().apply {
-            putExtra(EXTRA_QUIT_GAME_BUTTON_CLICKED_GAME_OVER, isQuitGameButtonClicked)
-        }
-        setResult(Activity.RESULT_OK, data)
     }
 
     override fun onBackPressed() {

@@ -3,10 +3,10 @@ package com.example.thousandaire
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 private const val EXTRA_CURRENT_AMOUNT_EARNED = "com.example.thousandaire.current_amount_earned"
 const val EXTRA_PLAY_OVER_CLICKED = "com.example.thousandaire.play_over_clicked"
@@ -35,13 +35,13 @@ class ScoreActivity : AppCompatActivity() {
             finishAffinity()
         }
 
-        playOverButton.setOnClickListener{
+        playOverButton.setOnClickListener {
             setPlayOverClicked(true)
             finish()
         }
     }
 
-    private fun setPlayOverClicked(isPlayOverButtonClicked : Boolean) {
+    private fun setPlayOverClicked(isPlayOverButtonClicked: Boolean) {
         val data = Intent().apply {
             putExtra(EXTRA_PLAY_OVER_CLICKED, isPlayOverButtonClicked)
         }
@@ -49,21 +49,21 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun setTextView(currentAmountEarned: Int) {
-        val currentAmount : String = when {
-            currentAmountEarned == R.string.point_planet_amount -> getString(R.string.point_mickey_amount)
-            currentAmountEarned == R.string.point_gilligan_amount -> getString(R.string.point_planet_amount)
-            currentAmountEarned == R.string.point_periodic_amount -> getString(R.string.point_gilligan_amount)
-            currentAmountEarned == R.string.point_valletta_amount -> getString(R.string.point_periodic_amount)
-            currentAmountEarned == R.string.point_miles_amount -> getString(R.string.point_valletta_amount)
-            currentAmountEarned == R.string.you_won_score -> getString(R.string.point_miles_amount)
+        val currentAmount: String = when (currentAmountEarned) {
+            R.string.point_planet_amount -> getString(R.string.point_mickey_amount)
+            R.string.point_gilligan_amount -> getString(R.string.point_planet_amount)
+            R.string.point_periodic_amount -> getString(R.string.point_gilligan_amount)
+            R.string.point_valletta_amount -> getString(R.string.point_periodic_amount)
+            R.string.point_miles_amount -> getString(R.string.point_valletta_amount)
+            R.string.you_won_score -> getString(R.string.point_miles_amount)
             else -> getString(R.string.default_text)
         }
-        val text : String = "Congratulations!\nYou earned \$$currentAmount."
-        scoreTextView.setText(text)
+        val text = "Congratulations!\nYou earned \$$currentAmount."
+        scoreTextView.text = text
     }
 
     companion object {
-        fun newIntent(packageContext: Context, currentAmountEarned : Int): Intent {
+        fun newIntent(packageContext: Context, currentAmountEarned: Int): Intent {
             return Intent(packageContext, ScoreActivity::class.java).apply {
                 putExtra(EXTRA_CURRENT_AMOUNT_EARNED, currentAmountEarned)
             }

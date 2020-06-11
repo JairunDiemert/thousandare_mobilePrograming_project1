@@ -2,11 +2,12 @@ package com.example.thousandaire
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.thousandaire.models.Game
 import com.example.thousandaire.models.Question
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var answerBottomRightButton: Button
 
     private val game: Game by lazy {
-        ViewModelProviders.of(this).get(Game::class.java)
+        ViewModelProvider(this).get(Game::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_mickey,
                 R.string.answer_mickey_pluto,
-                listOf<Int>(
+                listOf(
                     R.string.answer_mickey_pluto,
                     R.string.answer_mickey_goofy,
                     R.string.answer_mickey_minnie,
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_planet,
                 R.string.answer_planet_jupiter,
-                listOf<Int>(
+                listOf(
                     R.string.answer_planet_earth,
                     R.string.answer_planet_mars,
                     R.string.answer_planet_jupiter,
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_gilligan,
                 R.string.answer_gilligan_7,
-                listOf<Int>(
+                listOf(
                     R.string.answer_gilligan_2,
                     R.string.answer_gilligan_6,
                     R.string.answer_gilligan_7,
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_periodic,
                 R.string.answer_periodic_E,
-                listOf<Int>(
+                listOf(
                     R.string.answer_periodic_Tc,
                     R.string.answer_periodic_O,
                     R.string.answer_periodic_Fe,
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_valletta,
                 R.string.answer_valletta_malta,
-                listOf<Int>(
+                listOf(
                     R.string.answer_valletta_croatia,
                     R.string.answer_valletta_latvia,
                     R.string.answer_valletta_estonia,
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             Question(
                 R.string.question_miles,
                 R.string.answer_miles_100,
-                listOf<Int>(
+                listOf(
                     R.string.answer_miles_1,
                     R.string.answer_miles_10,
                     R.string.answer_miles_100,
@@ -124,12 +125,11 @@ class MainActivity : AppCompatActivity() {
 
         answerTopLeftButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[0]))) {
-                if(!game.isFinalQuestion()) {
+                if (!game.isFinalQuestion()) {
                     val nextQuestionAmount = game.nextQuestionAmount
                     val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                     startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
-                }
-                else if (game.isFinalQuestion()) {
+                } else if (game.isFinalQuestion()) {
                     val youWinAmount = R.string.you_won_score
                     val intent = ScoreActivity.newIntent(this, youWinAmount)
                     startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
@@ -141,12 +141,11 @@ class MainActivity : AppCompatActivity() {
         }
         answerTopRightButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[1]))) {
-                if(!game.isFinalQuestion()) {
+                if (!game.isFinalQuestion()) {
                     val nextQuestionAmount = game.nextQuestionAmount
                     val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                     startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
-                }
-                else if (game.isFinalQuestion()) {
+                } else if (game.isFinalQuestion()) {
                     val youWinAmount = R.string.you_won_score
                     val intent = ScoreActivity.newIntent(this, youWinAmount)
                     startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
@@ -158,12 +157,11 @@ class MainActivity : AppCompatActivity() {
         }
         answerBottomLeftButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[2]))) {
-                if(!game.isFinalQuestion()) {
+                if (!game.isFinalQuestion()) {
                     val nextQuestionAmount = game.nextQuestionAmount
                     val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                     startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
-                }
-                else if (game.isFinalQuestion()) {
+                } else if (game.isFinalQuestion()) {
                     val youWinAmount = R.string.you_won_score
                     val intent = ScoreActivity.newIntent(this, youWinAmount)
                     startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
@@ -175,12 +173,11 @@ class MainActivity : AppCompatActivity() {
         }
         answerBottomRightButton.setOnClickListener { view: View ->
             if (checkAnswer(getString(answerChoiceList[3]))) {
-                if(!game.isFinalQuestion()) {
+                if (!game.isFinalQuestion()) {
                     val nextQuestionAmount = game.nextQuestionAmount
                     val intent = ProceedActivity.newIntent(this, nextQuestionAmount)
                     startActivityForResult(intent, REQUEST_PROCEED_BUTTON_CLICKED)
-                }
-                else if (game.isFinalQuestion()) {
+                } else if (game.isFinalQuestion()) {
                     val youWinAmount = R.string.you_won_score
                     val intent = ScoreActivity.newIntent(this, youWinAmount)
                     startActivityForResult(intent, REQUEST_PLAY_OVER_BUTTON_CLICKED)
@@ -199,15 +196,15 @@ class MainActivity : AppCompatActivity() {
         if (resultCode != Activity.RESULT_OK) {
             if (resultCode != Activity.RESULT_CANCELED) {
                 return
-            }
-            else {
+            } else {
                 finish()
             }
         }
 
         if (requestCode == REQUEST_PROCEED_BUTTON_CLICKED) {
 
-            var proceedButtonClicked = data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
+            val proceedButtonClicked =
+                data?.getBooleanExtra(EXTRA_PROCEED_BUTTON_CLICKED, false) ?: false
             if (proceedButtonClicked) {
                 game.proceedToNextQuestion()
                 updateQuestion()
@@ -240,16 +237,16 @@ class MainActivity : AppCompatActivity() {
         answerBottomRightButton.setText(answerChoiceList[3])
     }
 
-    private fun checkAnswer(userAnswer: String) : Boolean {
+    private fun checkAnswer(userAnswer: String): Boolean {
         val currentQuestionAnswer = getString(game.currentQuestionAnswer)
-        return when {
-            userAnswer == currentQuestionAnswer -> true
+        return when (userAnswer) {
+            currentQuestionAnswer -> true
             else -> false
         }
     }
 
     private fun resetGameIndex() {
-        while(!game.isFinalQuestion())
+        while (!game.isFinalQuestion())
             game.proceedToNextQuestion()
         game.proceedToNextQuestion()
 
